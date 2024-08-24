@@ -1,0 +1,14 @@
+#include "gpio.h"
+#include "stm32f4xx.h"
+
+void GPIO_init(void) {
+   /* Enable GPIOE clock */
+  RCC->AHB1ENR |= RCC_AHB1ENR_GPIOEEN;
+
+  /* Init LED1-LED3 to output */
+  GPIOE->MODER &= ~(GPIO_MODER_MODE13|GPIO_MODER_MODE14|GPIO_MODER_MODE15);
+  GPIOE->MODER |= GPIO_MODER_MODE13_0|GPIO_MODER_MODE14_0|GPIO_MODER_MODE15_0;
+  /* LED1-LED3 off */
+  GPIOE->BSRR |= GPIO_BSRR_BS13|GPIO_BSRR_BS14|GPIO_BSRR_BS15;
+  
+}
